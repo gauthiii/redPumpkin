@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const CONTRACT = 'RPUMxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+const PUMPKIN = `${import.meta.env.BASE_URL}pumpkin.png`
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
@@ -176,14 +177,14 @@ export default function App() {
       {/* Parallax floating pumpkins */}
       <div className="float-layer" aria-hidden="true">
         {[...Array(6)].map((_, i) => (
-          <img key={i} src="/pumpkin.png" alt="" className={`float-pumpkin fp-${i + 1}`} />
+          <img key={i} src={PUMPKIN} alt="" className={`float-pumpkin fp-${i + 1}`} />
         ))}
       </div>
 
       {/* ─── Navbar ─── */}
       <header className="navbar">
         <a href="#top" className="nav-brand">
-          <img src="/pumpkin.png" alt="RedPumpkin logo" className="nav-logo" />
+          <img src={PUMPKIN} alt="RedPumpkin logo" className="nav-logo" />
           <span className="nav-title">
             Red<span className="accent">Pumpkin</span> <span className="ticker">$RPUM</span>
           </span>
@@ -206,7 +207,7 @@ export default function App() {
             <div className="coin-wrap" data-fx="zoom-deep">
               <div className="coin-inner">
                 <div className="coin-face coin-front">
-                  <img src="/pumpkin.png" alt="RedPumpkin coin" />
+                  <img src={PUMPKIN} alt="RedPumpkin coin" />
                 </div>
                 <div className="coin-face coin-back">
                   <span className="coin-back-text">RPUM</span>
@@ -259,7 +260,7 @@ export default function App() {
           <h2 className="section-title" data-fx="flip-up">Why So <span className="accent">Angry?</span></h2>
           <div className="about-grid">
             <div className="about-art" data-fx="tilt-left">
-              <img src="/pumpkin.png" alt="The angry RedPumpkin mascot" />
+              <img src={PUMPKIN} alt="The angry RedPumpkin mascot" />
             </div>
             <div className="about-text" data-fx="tilt-right">
               <p>
@@ -374,7 +375,7 @@ export default function App() {
           </div>
 
           <div className="cta-banner" data-fx="zoom-deep">
-            <img src="/pumpkin.png" alt="" className="cta-pumpkin" />
+            <img src={PUMPKIN} alt="" className="cta-pumpkin" />
             <h3>Don't make the pumpkin angrier.</h3>
             <p>Every second you're not holding $RPUM, its eyebrows get bushier.</p>
             <a href="#how-to-buy" className="btn btn-primary">🎃 Buy $RPUM</a>
@@ -386,7 +387,7 @@ export default function App() {
       <footer className="footer">
         <div className="footer-top">
           <div className="footer-brand">
-            <img src="/pumpkin.png" alt="RedPumpkin" className="nav-logo" />
+            <img src={PUMPKIN} alt="RedPumpkin" className="nav-logo" />
             <div>
               <span className="nav-title">Red<span className="accent">Pumpkin</span></span>
               <p className="footer-owner">Founded &amp; owned by <strong>Gautham Vijayaraj</strong></p>
