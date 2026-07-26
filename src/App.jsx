@@ -8,17 +8,20 @@ const PUMPKIN = `${import.meta.env.BASE_URL}pumpkin.png`
 
 /*
  * ─────────────────────────────────────────────────────────────
- *  LAUNCH CONFIG — the only block that needs editing on launch day.
- *  Flip `live` to true and paste the four real values below
- *  (Phase 3, step 6 of LAUNCH.md). Everything else updates itself.
+ *  LAUNCH CONFIG — RPUM is live on pump.fun.
+ *  `graduated` flips to true if/when the bonding curve fills and
+ *  liquidity migrates to a DEX (pump.fun burns the LP automatically).
  * ─────────────────────────────────────────────────────────────
  */
+const MINT = 'GAmuNGKczjDUBhUxMQbn5bhDZggcc75WWX6GG6rwpump'
+
 const LAUNCH = {
-  live: false,
-  mintAddress: '',   // e.g. '7xKX...9fPq' — the SPL mint address
-  revokeTxUrl: '',   // Solana Explorer link to the mint-authority revocation tx
-  freezeTxUrl: '',   // Solana Explorer link to the freeze-authority revocation tx
-  poolUrl: '',       // Raydium pool / swap link
+  live: true,
+  graduated: false,
+  mintAddress: MINT,
+  pumpFunUrl: `https://pump.fun/coin/${MINT}`,
+  explorerUrl: `https://explorer.solana.com/address/${MINT}`,
+  solscanUrl: `https://solscan.io/token/${MINT}`,
 }
 
 const REPO_URL = 'https://github.com/gauthiii/redPumpkin'
@@ -28,90 +31,85 @@ const NAV_LINKS = [
   { label: 'Tokenomics', href: '#tokenomics' },
   { label: 'Risks', href: '#risks' },
   { label: 'How to Buy', href: '#how-to-buy' },
-  { label: 'Roadmap', href: '#roadmap' },
+  { label: 'Status', href: '#roadmap' },
 ]
 
 const STATS = [
   { value: '1B', label: 'Total Supply' },
-  { value: '92%', label: 'To Liquidity' },
-  { value: '8%', label: 'Creator Holds' },
-  { value: '0%', label: 'Trading Tax' },
+  { value: '0%', label: 'Creator Holds' },
+  { value: 'Revoked', label: 'Mint & Freeze' },
+  { value: 'pump.fun', label: 'Launched On' },
 ]
 
 const TOKENOMICS = [
   {
     icon: '🎃', title: 'Total Supply', value: '1,000,000,000',
-    desc: 'One billion $RPUM, minted once and fixed forever. Not one pumpkin more.',
+    desc: 'The pump.fun standard — one billion RPUM, created once. The supply is fixed and cannot grow.',
   },
   {
-    icon: '🔒', title: 'Mint Authority', value: 'Revoked',
-    desc: 'Revoked immediately after the mint, along with freeze authority. Nobody — including the creator — can ever create more RPUM or freeze your wallet. Verifiable on Solana Explorer.',
+    icon: '🔒', title: 'Mint & Freeze', value: 'Revoked',
+    desc: 'Both authorities are revoked by the pump.fun program at creation. Nobody — creator included — can mint more RPUM or freeze your wallet. Check it yourself on Solana Explorer.',
   },
   {
-    icon: '🚫', title: 'Trading Tax', value: '0% / 0%',
-    desc: 'No buy tax, no sell tax, no hidden mechanism in the token. (Raydium charges its own standard swap fee — that goes to the exchange, not to us.)',
+    icon: '🙅', title: 'Creator Holds', value: 'Zero',
+    desc: 'Gautham Vijayaraj bought none of the supply at launch. No dev bag, no team allocation, no reserve wallet. Every RPUM in existence was bought by someone on the open market.',
   },
   {
-    icon: '🙋', title: 'Creator Holds', value: '8%',
-    desc: '80,000,000 RPUM held by Gautham Vijayaraj — disclosed upfront. That is the only way value could ever accrue to the creator. No other allocation exists.',
+    icon: '📈', title: 'Distribution', value: 'Bonding Curve',
+    desc: 'No pre-sale and no allocations. Everyone buys from the same curve at the same price at the same moment — the price rises as people buy and falls as they sell.',
   },
-]
-
-const DISTRIBUTION = [
-  { label: 'Liquidity Pool', pct: 92, note: 'paired with SOL on Raydium' },
-  { label: 'Creator (Gautham Vijayaraj)', pct: 8, note: 'disclosed, no lock-up theatre' },
 ]
 
 const RISKS = [
   {
-    icon: '💧', title: 'The liquidity pool is tiny — about $7–9',
-    desc: 'This is deliberate: the entire launch budget is roughly $13. It means RPUM is genuinely tradeable, but barely liquid.',
+    icon: '💀', title: 'Almost every pump.fun coin goes to zero',
+    desc: 'The overwhelming majority never fill their bonding curve and end up worthless. Assume by default that RPUM will be one of them.',
   },
   {
-    icon: '📉', title: 'A single $5–10 trade could move the price 30–50%',
-    desc: 'At this pool size, slippage is severe. Use a high slippage tolerance and expect wild swings on almost no volume.',
+    icon: '🎢', title: 'The price can move violently',
+    desc: 'On a bonding curve, small trades move the price a lot, and whoever bought earliest has a much lower cost basis than you do. Anyone can sell at any moment.',
   },
   {
-    icon: '👻', title: 'It may not show up on price trackers',
-    desc: 'DexScreener, Birdeye and similar tools often hide or flag pools this small. Do not be surprised if there is no chart.',
+    icon: '🚧', title: 'There is no product behind this',
+    desc: 'No revenue, no utility, no team, no treasury, no staking, no listings planned. RPUM is an angry cartoon vegetable on the internet — nothing more.',
   },
   {
-    icon: '🤷', title: 'There is no plan to make you money',
-    desc: 'No marketing budget, no exchange listings, no promotion campaign. RPUM exists because it was fun to build. That is the entire pitch.',
+    icon: '🧪', title: 'This is an experiment, not a business',
+    desc: 'It was launched to learn how pump.fun works. There is no marketing budget and no obligation on the creator to do anything further — ever.',
   },
 ]
 
 const BUY_STEPS = [
-  { num: '01', title: 'Get a Wallet', desc: 'Install Phantom or Solflare, create a Solana wallet, and guard the seed phrase like a pumpkin guards its patch. Nobody legitimate will ever ask you for it.' },
-  { num: '02', title: 'Add Some SOL', desc: 'Buy SOL on any exchange and send it to your wallet. You only need a tiny amount — and please treat whatever you spend as money you are fine losing.' },
-  { num: '03', title: 'Swap on Raydium', desc: 'Paste the official mint address below into Raydium or Jupiter and swap. Raise your slippage tolerance — the pool is thin, so a normal 1% setting will simply fail.' },
-  { num: '04', title: 'That’s It', desc: 'Hold it, sell it, or forget about it entirely. There is no staking, no rewards programme and no obligation. The pumpkin does not chase you.' },
+  { num: '01', title: 'Get a Wallet', desc: 'Install Phantom or Solflare and create a Solana wallet. Guard the seed phrase like a pumpkin guards its patch — nobody legitimate will ever ask you for it.' },
+  { num: '02', title: 'Add Some SOL', desc: 'Buy SOL on any exchange and send it to your wallet. You need very little — and treat whatever you spend as money you are completely fine never seeing again.' },
+  { num: '03', title: 'Buy on pump.fun', desc: 'Open the RPUM page on pump.fun, connect your wallet, and swap SOL for RPUM. Always check the mint address matches the one on this page before you trade.' },
+  { num: '04', title: 'That’s It', desc: 'Hold it, sell it, or forget it exists. There is no staking, no rewards, no roadmap and no obligation. The pumpkin does not chase you.' },
 ]
 
-const ROADMAP = [
+const STATUS_ITEMS = [
   {
-    phase: 'Phase 1', title: 'Prep', status: 'active', cost: '$0 · ~1 day',
-    items: ['Set up Phantom wallet', 'Finalise the RPUM logo', 'Write token metadata JSON', 'Decide whether socials are worth it'],
+    icon: '✅', title: 'Live on pump.fun', state: 'now',
+    desc: 'RPUM was launched on pump.fun as an experiment. It trades on a bonding curve right now, with mint and freeze authority already revoked and zero creator holding.',
   },
   {
-    phase: 'Phase 2', title: 'Build & Test on Devnet', status: 'active', cost: '$0 · ~2–4 days',
-    items: ['This landing page — live ✔', 'Write the mint script (@solana/web3.js + spl-token)', 'Full dry run on devnet with fake SOL', 'Verify supply = 1B and authorities revoked'],
+    icon: '💧', title: 'If the curve fills', state: 'maybe',
+    desc: 'Should enough buying happen, pump.fun automatically migrates the liquidity to a DEX and burns the LP tokens. That is handled by the platform — it requires nothing from the creator, and it may well never happen.',
   },
   {
-    phase: 'Phase 3', title: 'Mainnet Launch', status: 'next', cost: '~$10–13 · ~1 day',
-    items: ['Mint 1,000,000,000 RPUM for real', 'Send 8% to creator wallet, 92% toward liquidity', 'Revoke mint + freeze authority permanently', 'Open the Raydium pool with ~$7–9 in SOL', 'Publish the real address and proof links here'],
+    icon: '🛠️', title: 'A self-minted token, maybe, someday', state: 'maybe',
+    desc: 'There is a written plan in the repo for launching an independent SPL token with self-funded liquidity. It is on hold indefinitely and is not a promise. If it ever happens, it will be announced here.',
   },
   {
-    phase: 'Phase 4', title: 'Aftermath', status: 'next', cost: '$0/month · indefinite',
-    items: ['Nothing to maintain — no servers, no fees', 'More liquidity can be added anytime, if ever', 'No promotion promised, none required', 'No listings, staking, NFTs or merch planned'],
+    icon: '🚫', title: 'Things that are not planned', state: 'never',
+    desc: 'No exchange listings, no staking, no NFT collection, no merch store, no payments integration, no utility. If you see anyone promising those for RPUM, they do not speak for this project.',
   },
 ]
 
 const LINKS = [
-  { icon: '💻', name: 'Source Code', handle: 'github.com/gauthiii/redPumpkin', href: REPO_URL },
-  { icon: '📄', name: 'Launch Plan', handle: 'Read LAUNCH.md', href: `${REPO_URL}/blob/main/LAUNCH.md` },
-  { icon: '🔍', name: 'Solana Explorer', handle: LAUNCH.live ? 'Verify the mint' : 'Available at launch', href: LAUNCH.live ? `https://explorer.solana.com/address/${LAUNCH.mintAddress}` : null },
-  { icon: '𝕏', name: 'Socials', handle: 'None yet — maybe never', href: null },
+  { icon: '🚀', name: 'Trade on pump.fun', handle: 'Official coin page', href: LAUNCH.pumpFunUrl },
+  { icon: '🔍', name: 'Solana Explorer', handle: 'Verify the mint', href: LAUNCH.explorerUrl },
+  { icon: '📊', name: 'Solscan', handle: 'Supply & holders', href: LAUNCH.solscanUrl },
+  { icon: '💻', name: 'Source Code', handle: 'This whole website', href: REPO_URL },
 ]
 
 function useScrollAnimations(rootRef) {
@@ -241,8 +239,8 @@ export default function App() {
           ))}
         </nav>
         <div className="nav-right">
-          <a href={REPO_URL} target="_blank" rel="noreferrer" className="btn btn-primary btn-sm">
-            {LAUNCH.live ? 'Source' : 'Follow Along'}
+          <a href={LAUNCH.pumpFunUrl} target="_blank" rel="noreferrer" className="btn btn-primary btn-sm">
+            Trade on pump.fun
           </a>
           <button className="nav-burger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">☰</button>
         </div>
@@ -264,11 +262,9 @@ export default function App() {
               <div className="coin-shadow" />
             </div>
 
-            {!LAUNCH.live && (
-              <span className="status-badge" data-fx="flip-up">
-                <span className="status-dot" /> Not launched yet — in development
-              </span>
-            )}
+            <span className="status-badge live" data-fx="flip-up">
+              <span className="status-dot" /> Live on pump.fun
+            </span>
 
             <h1 className="hero-title" data-fx="flip-up">
               RED<span className="accent">PUMPKIN</span>
@@ -277,13 +273,14 @@ export default function App() {
               The <strong>angriest coin</strong> in the patch. 🎃🔥
             </p>
             <p className="hero-sub" data-fx="flip-up" data-fx-delay="220">
-              A small, honest meme coin coming to Solana. Fixed supply of one billion,
-              zero trading tax, mint authority revoked on day one — and absolutely no
-              promises about making anyone rich. It exists because it was fun to build.
+              A meme coin on Solana, launched on pump.fun. One billion supply, mint and
+              freeze authority revoked, and <strong>zero held by the creator</strong> — no
+              dev bag, no team allocation. It exists because it was fun to build, and for
+              no other reason.
             </p>
 
             <div className="hero-ctas" data-fx="flip-up" data-fx-delay="320">
-              <a href="#tokenomics" className="btn btn-primary">🎃 See the Token Design</a>
+              <a href={LAUNCH.pumpFunUrl} target="_blank" rel="noreferrer" className="btn btn-primary">🚀 Trade on pump.fun</a>
               <a href="#risks" className="btn btn-ghost">Read the Risks First</a>
             </div>
 
@@ -335,16 +332,16 @@ export default function App() {
               </p>
               <p>
                 That's the fun part. Here's the honest part: <strong>RedPumpkin ($RPUM)</strong> is
-                a personal project by <strong>Gautham Vijayaraj</strong>, launched on Solana for
-                roughly the price of a sandwich. There's no team, no fundraise, no marketing
-                budget and no roadmap full of things that will never ship. One angry vegetable,
-                a fixed supply, and a very small pool of liquidity.
+                a personal experiment by <strong>Gautham Vijayaraj</strong>, launched on pump.fun
+                to learn how a Solana meme coin launch actually works. There's no team, no
+                fundraise, no marketing budget, and no roadmap full of things that will never
+                ship. One angry vegetable and a bonding curve.
               </p>
               <ul className="about-list">
-                <li>🎃 Fixed supply — 1,000,000,000, mint authority revoked at launch</li>
-                <li>🙋 Creator holds 8% — stated openly, no hidden wallets</li>
-                <li>💧 Everything else goes to liquidity — no marketing bag, no vesting</li>
-                <li>⚡ Built on Solana — because fees are cents, not dollars</li>
+                <li>🎃 Fixed supply — 1,000,000,000 RPUM, it cannot grow</li>
+                <li>🙅 Creator holds zero — no dev buy, no reserve wallet</li>
+                <li>🔒 Mint & freeze authority revoked at creation</li>
+                <li>📈 Fair bonding curve — no pre-sale, no allocations</li>
                 <li>🤷 No promotion, no promises — it just exists</li>
               </ul>
             </div>
@@ -372,40 +369,28 @@ export default function App() {
           </div>
 
           <div className="dist-card" data-fx="zoom-deep">
-            <h3>Token Distribution</h3>
-            {DISTRIBUTION.map((d) => (
-              <div className="dist-row" key={d.label}>
-                <span className="dist-label">
-                  {d.label}
-                  <small>{d.note}</small>
-                </span>
-                <div className="dist-bar">
-                  <div className="dist-fill" style={{ width: `${d.pct}%` }} />
-                </div>
-                <span className="dist-pct">{d.pct}%</span>
-              </div>
-            ))}
-
+            <h3>Verify Everything Yourself</h3>
+            <p className="verify-intro">
+              Don't take any of it on faith — the mint address is public and every claim
+              above is checkable on-chain in about thirty seconds.
+            </p>
+            <div className="mint-row">
+              <span className="mint-label">Mint address</span>
+              <code className="mint-code">{LAUNCH.mintAddress}</code>
+              <button className="mint-copy" onClick={copyContract}>
+                {copied ? '✅ Copied' : '📋 Copy'}
+              </button>
+            </div>
             <div className="proof-links">
-              {LAUNCH.live ? (
-                <>
-                  <a href={LAUNCH.revokeTxUrl} target="_blank" rel="noreferrer" className="proof-link">
-                    🔒 Mint authority revoked — view transaction
-                  </a>
-                  <a href={LAUNCH.freezeTxUrl} target="_blank" rel="noreferrer" className="proof-link">
-                    🧊 Freeze authority revoked — view transaction
-                  </a>
-                  <a href={LAUNCH.poolUrl} target="_blank" rel="noreferrer" className="proof-link">
-                    💧 Raydium liquidity pool
-                  </a>
-                </>
-              ) : (
-                <span className="proof-pending">
-                  🔗 Proof links — mint address, authority-revocation transactions and the
-                  Raydium pool — will be published here at launch so anyone can verify all
-                  of the above on Solana Explorer. Until then, take none of it on faith.
-                </span>
-              )}
+              <a href={LAUNCH.explorerUrl} target="_blank" rel="noreferrer" className="proof-link">
+                🔍 Solana Explorer — confirm mint &amp; freeze authority show “None”
+              </a>
+              <a href={LAUNCH.solscanUrl} target="_blank" rel="noreferrer" className="proof-link">
+                📊 Solscan — inspect total supply and the full holder list
+              </a>
+              <a href={LAUNCH.pumpFunUrl} target="_blank" rel="noreferrer" className="proof-link">
+                🚀 pump.fun — the official coin page, chart and trade history
+              </a>
             </div>
           </div>
         </section>
@@ -451,26 +436,22 @@ export default function App() {
           </div>
         </section>
 
-        {/* ─── Roadmap ─── */}
+        {/* ─── Where things stand ─── */}
         <section id="roadmap" className="section">
-          <h2 className="section-title" data-fx="flip-up">Launch <span className="accent">Plan</span></h2>
+          <h2 className="section-title" data-fx="flip-up">Where Things <span className="accent">Stand</span></h2>
           <p className="section-sub" data-fx="flip-up" data-fx-delay="100">
-            The whole thing, start to finish, for about $13. No phase five where we promise
-            you a metaverse.
+            Not a roadmap. Roadmaps are promises, and this project doesn't make any.
           </p>
           <div className="roadmap-grid">
             <div className="roadmap-line"><div className="roadmap-line-fill" /></div>
-            {ROADMAP.map((r, i) => (
-              <div className={`roadmap-item ${i % 2 === 0 ? 'left' : 'right'}`} data-fx={i % 2 === 0 ? 'tilt-left' : 'tilt-right'} key={r.phase}>
-                <TiltCard className={`roadmap-card status-${r.status}`}>
-                  <span className="roadmap-phase">{r.phase} · {r.cost}</span>
-                  <h3>{r.title}</h3>
-                  <ul>
-                    {r.items.map((item) => <li key={item}>{item}</li>)}
-                  </ul>
-                  <span className="roadmap-status">
-                    {r.status === 'done' ? '✅ Complete' : r.status === 'active' ? '🔨 In Progress' : '⏳ Not Started'}
+            {STATUS_ITEMS.map((r, i) => (
+              <div className={`roadmap-item ${i % 2 === 0 ? 'left' : 'right'}`} data-fx={i % 2 === 0 ? 'tilt-left' : 'tilt-right'} key={r.title}>
+                <TiltCard className={`roadmap-card state-${r.state}`}>
+                  <span className="roadmap-phase">
+                    {r.state === 'now' ? 'Right now' : r.state === 'maybe' ? 'Possible, not promised' : 'Not happening'}
                   </span>
+                  <h3><span className="status-emoji">{r.icon}</span> {r.title}</h3>
+                  <p className="status-desc">{r.desc}</p>
                 </TiltCard>
               </div>
             ))}
@@ -481,7 +462,7 @@ export default function App() {
         <section id="community" className="section">
           <h2 className="section-title" data-fx="flip-up">Check the <span className="accent">Receipts</span></h2>
           <p className="section-sub" data-fx="flip-up" data-fx-delay="100">
-            There's no Telegram to shill in. There is, however, source code you can read.
+            There's no Telegram to shill in. There is, however, a public blockchain.
           </p>
           <div className="social-grid">
             {LINKS.map((s, i) =>
@@ -507,12 +488,12 @@ export default function App() {
 
           <div className="cta-banner" data-fx="zoom-deep">
             <img src={PUMPKIN} alt="" className="cta-pumpkin" />
-            <h3>The pumpkin is still angry.</h3>
+            <h3>The pumpkin is angry. It is not desperate.</h3>
             <p>
-              It's just not for sale yet — and when it is, it won't be begging.
-              Watch the repo if you want to see how a $13 token gets built.
+              Buy it, don't buy it — it will scowl either way. Just read the risks first
+              and never spend money you'd miss.
             </p>
-            <a href={REPO_URL} target="_blank" rel="noreferrer" className="btn btn-primary">💻 View the Source</a>
+            <a href={LAUNCH.pumpFunUrl} target="_blank" rel="noreferrer" className="btn btn-primary">🚀 View on pump.fun</a>
           </div>
         </section>
       </main>
@@ -533,13 +514,14 @@ export default function App() {
         </div>
         <p className="footer-disclaimer">
           <strong>Disclaimer.</strong> $RPUM is a meme coin created for entertainment purposes.
-          It has no intrinsic value, no underlying business, and no expectation of financial
-          return. The creator, Gautham Vijayaraj, holds 8% of the total supply — this is
-          disclosed openly and is the only mechanism by which value could accrue to him.
-          Initial liquidity is intentionally minimal (roughly $7–9), so the price is extremely
-          volatile and a single small trade can move it dramatically. Nothing on this site is
-          financial, investment, or legal advice. Never spend more than you can afford to lose
-          entirely, and always verify the mint address on Solana Explorer before trading.
+          It has no intrinsic value, no underlying business, no utility, and no expectation of
+          financial return. It was launched on pump.fun as a personal experiment; the creator,
+          Gautham Vijayaraj, holds none of the supply and receives nothing from it. Meme coins
+          are extremely volatile and the overwhelming majority lose essentially all of their
+          value — you should assume RPUM will too. Nothing on this site is financial, investment,
+          or legal advice. Never spend more than you can afford to lose entirely, and always
+          verify the mint address above on Solana Explorer before trading, as impostor tokens
+          are common.
         </p>
         <p className="footer-copy">© 2026 RedPumpkin ($RPUM) · Gautham Vijayaraj · All rage reserved.</p>
       </footer>

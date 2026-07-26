@@ -1,5 +1,15 @@
 # RedPumpkin (RPUM) — End-to-End Launch Plan
 
+> ⏸️ **Status: on hold.** RPUM was instead launched on **pump.fun** as a first experiment —
+> mint `GAmuNGKczjDUBhUxMQbn5bhDZggcc75WWX6GG6rwpump`. That launch uses a bonding curve, not
+> the self-minted SPL token and self-funded Raydium pool described below, and the creator
+> holds none of the supply. This document is retained as a possible future path, not a
+> commitment. Nothing in it describes the currently live token.
+>
+> If this plan is ever revived, add **freeze authority revocation** to the Phase 2 script —
+> the original draft only covers mint authority, and Solana risk scanners flag an active
+> freeze authority more harshly.
+
 **Prepared for:** Gautham
 **Token:** RedPumpkin (RPUM)
 **Chain:** Solana (SPL Token)

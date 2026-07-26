@@ -77,24 +77,31 @@ Every push to `main` triggers the [deploy workflow](.github/workflows/deploy.yml
 
 ## Token Details
 
-> ⚠️ **Status: not launched.** RPUM has not been minted. The figures below are the planned
-> design from [LAUNCH.md](LAUNCH.md), not on-chain facts. The site reflects this state via the
-> `LAUNCH` config block at the top of [src/App.jsx](src/App.jsx) — flip `live` to `true` and
-> paste the real mint address, revocation transactions, and pool link on launch day.
+> ✅ **Status: live on pump.fun.**
 
 | | |
 |---|---|
 | Name | RedPumpkin |
 | Ticker | $RPUM |
-| Chain | Solana (SPL) |
-| Total Supply | 1,000,000,000 (fixed) |
-| Creator holding | 8% (80,000,000), disclosed |
-| Liquidity | 92%, paired with ~$7–9 SOL on Raydium |
-| Taxes | 0% buy / 0% sell |
-| Mint & freeze authority | Revoked at launch |
+| Chain | Solana |
+| Launched via | [pump.fun](https://pump.fun/coin/GAmuNGKczjDUBhUxMQbn5bhDZggcc75WWX6GG6rwpump) (bonding curve) |
+| Mint address | `GAmuNGKczjDUBhUxMQbn5bhDZggcc75WWX6GG6rwpump` |
+| Total supply | 1,000,000,000 (fixed) |
+| Creator holding | **Zero** — no dev buy, no team allocation |
+| Mint & freeze authority | Revoked at creation by the pump.fun program |
 
-Token metadata for the SPL mint is served from [public/metadata.json](public/metadata.json)
-at `https://gauthiii.github.io/redPumpkin/metadata.json`.
+Verify independently on
+[Solana Explorer](https://explorer.solana.com/address/GAmuNGKczjDUBhUxMQbn5bhDZggcc75WWX6GG6rwpump)
+or [Solscan](https://solscan.io/token/GAmuNGKczjDUBhUxMQbn5bhDZggcc75WWX6GG6rwpump).
+
+The live values on the site come from the `LAUNCH` config block at the top of
+[src/App.jsx](src/App.jsx). Set `graduated: true` there if the bonding curve ever fills and
+liquidity migrates to a DEX.
+
+> [LAUNCH.md](LAUNCH.md) describes a *different*, self-minted SPL launch with self-funded
+> Raydium liquidity. That plan is **on hold indefinitely** and does not describe the live
+> token. [public/metadata.json](public/metadata.json) belongs to that plan and is unused
+> today — pump.fun hosts its own token metadata.
 
 ## Owner
 

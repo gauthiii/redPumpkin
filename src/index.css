@@ -298,12 +298,20 @@ body {
   text-transform: uppercase;
   box-shadow: var(--shadow);
 }
+.status-badge.live {
+  background: rgba(106, 143, 60, 0.95);
+  color: var(--cream);
+}
 .status-dot {
   width: 9px;
   height: 9px;
   border-radius: 50%;
   background: var(--red);
   animation: dot-pulse 1.6s ease-in-out infinite;
+}
+.status-badge.live .status-dot {
+  background: #b6f36a;
+  box-shadow: 0 0 8px #b6f36a;
 }
 @keyframes dot-pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -510,7 +518,55 @@ body {
   opacity: 0.65;
 }
 
-/* Proof links (mint address, revocation txs, pool) */
+/* Verify block — mint address + proof links */
+.verify-intro {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  max-width: 620px;
+  margin: -0.6rem auto 1.4rem;
+  opacity: 0.85;
+}
+.mint-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 16px;
+  border: 2px dashed var(--red-dark);
+  background: rgba(255, 201, 60, 0.22);
+}
+.mint-label {
+  font-weight: 900;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red-dark);
+}
+.mint-code {
+  flex: 1 1 260px;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  word-break: break-all;
+  line-height: 1.4;
+}
+.mint-copy {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 0.85rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 2px solid var(--ink);
+  background: var(--cream);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.mint-copy:hover { transform: scale(1.05); }
+
+/* Proof links */
 .proof-links {
   margin-top: 1.4rem;
   padding-top: 1.2rem;
@@ -661,6 +717,20 @@ body {
 }
 .status-done .roadmap-status { background: rgba(106, 143, 60, 0.35); }
 .status-active .roadmap-status { background: rgba(232, 64, 42, 0.25); }
+
+/* Where-things-stand cards */
+.status-desc {
+  font-weight: 600;
+  font-size: 0.97rem;
+  line-height: 1.6;
+}
+.status-emoji { margin-right: 0.3rem; }
+.roadmap-card.state-now { border-color: var(--green); }
+.roadmap-card.state-now .roadmap-phase { color: var(--green); }
+.roadmap-card.state-maybe .roadmap-phase { color: #b07a12; }
+.roadmap-card.state-never { opacity: 0.92; }
+.roadmap-card.state-never .roadmap-phase { color: var(--red-dark); }
+.roadmap-card.state-never h3 { text-decoration: line-through; text-decoration-thickness: 2px; }
 
 /* ───────── Community ───────── */
 .social-grid {
