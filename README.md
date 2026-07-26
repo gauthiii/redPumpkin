@@ -77,13 +77,24 @@ Every push to `main` triggers the [deploy workflow](.github/workflows/deploy.yml
 
 ## Token Details
 
+> ⚠️ **Status: not launched.** RPUM has not been minted. The figures below are the planned
+> design from [LAUNCH.md](LAUNCH.md), not on-chain facts. The site reflects this state via the
+> `LAUNCH` config block at the top of [src/App.jsx](src/App.jsx) — flip `live` to `true` and
+> paste the real mint address, revocation transactions, and pool link on launch day.
+
 | | |
 |---|---|
 | Name | RedPumpkin |
 | Ticker | $RPUM |
-| Chain | Solana |
-| Total Supply | 1,000,000,000 |
+| Chain | Solana (SPL) |
+| Total Supply | 1,000,000,000 (fixed) |
+| Creator holding | 8% (80,000,000), disclosed |
+| Liquidity | 92%, paired with ~$7–9 SOL on Raydium |
 | Taxes | 0% buy / 0% sell |
+| Mint & freeze authority | Revoked at launch |
+
+Token metadata for the SPL mint is served from [public/metadata.json](public/metadata.json)
+at `https://gauthiii.github.io/redPumpkin/metadata.json`.
 
 ## Owner
 

@@ -1,0 +1,18 @@
+{
+  "name": "RedPumpkin",
+  "symbol": "RPUM",
+  "description": "The angriest coin in the patch. A small, honest meme coin on Solana with a fixed supply of 1,000,000,000, zero trading tax, and mint authority revoked at launch. No promises, no roadmap theatre — it exists because it was fun to build.",
+  "image": "https://gauthiii.github.io/redPumpkin/pumpkin.png",
+  "external_url": "https://gauthiii.github.io/redPumpkin/",
+  "attributes": [],
+  "properties": {
+    "files": [
+      {
+        "uri": "https://gauthiii.github.io/redPumpkin/pumpkin.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+    "creators": []
+  }
+}
